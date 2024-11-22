@@ -12,14 +12,23 @@ export async function findPostById (req, res){
 
 export async function saveNewPost(req, res){
     let newPost = req.body;
-
     try{
         const postCriado = await postModel.create(newPost);
         res.status(200).json(postCriado);
     }catch(erro){
         console.error(erro.message);
         res.status(500).json({"Erro": "Falha na requisição."});
+    }
+}
 
+export async function uploadImagem(req, res){
+    let newPost = req.body;
+    try{
+        const postCriado = await postModel.create(newPost);
+        res.status(200).json(postCriado);
+    }catch(erro){
+        console.error(erro.message);
+        res.status(500).json({"Erro": "Falha na requisição."});
     }
 }
 
