@@ -22,7 +22,7 @@ const routes = (app) => {
     app.get('/posts/:id',postsController.findPostById);
     app.post("/posts", postsController.saveNewPost);
     app.delete("/posts", postsController.destroy);
-    app.post('/upload', upload.single("imgUrl"), postsController.uploadImagem);
+    app.post('/upload', upload.single("imagem"), postsController.uploadImagem);
 }
 
 export default routes;
