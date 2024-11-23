@@ -25,6 +25,16 @@ export function create(newPost) {
         console.error(erro.message);
     }
 }
+export function updatePost(id, novoPost) {
+    try {
+        const db = conexao.db("imersao-alura");
+        const colecao = db.collection("posts");
+        const objId = ObjectId.createFromHexString(id);
+        return colecao.updateOne({_id: new ObjectId(objId)}, {$set:novoPost})
+    } catch (erro) {
+        console.error(erro.message);
+    }
+}
 
 export function deletePost(postId) {
     try {
