@@ -41,7 +41,8 @@ export function deletePost(postId) {
     try {
         const db = conexao.db("imersao-alura");
         const colecao = db.collection("posts");
-        return colecao.deleteOne({_id: new ObjectId(postId)});
+        const objID = ObjectId.createFromHexString(postId)
+        return colecao.deleteOne({_id: new ObjectId(objID)});
     } catch (erro) {
         console.error(erro.message);
     }

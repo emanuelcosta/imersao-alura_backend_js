@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import * as postModel from "../models/postsModel.js";
 import fs from "fs";
 import gerarDescricaoComGemini from "../services/geminiServices.js";
@@ -13,8 +14,19 @@ export async function findPostById (req, res){
 }
 
 export async function saveNewPost(req, res){
-    let newPost = req.body;
+   
     try{
+        console.log(process.env.APP_URL)
+        let filename = req.file.originalname;
+        const urlImagem = `http://localhost:3000/${filename}`;
+        const imgBuffer = fs.readFileSync( `uploads/${filename}`)
+        const descricao = await gerarDescricaoComGemini(imgBuffer);
+
+        let newPost = {
+            imgUrl: urlImagem,
+            descricao:descricao,
+            alt: ""
+        };
         const postCriado = await postModel.create(newPost);
         res.status(200).json(postCriado);
     }catch(erro){

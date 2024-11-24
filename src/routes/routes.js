@@ -28,7 +28,7 @@ const routes = (app) => {
     });
     app.get('/posts',postsController.listarPosts);
     app.get('/posts/:id',postsController.findPostById);
-    app.post("/posts", postsController.saveNewPost);
+    app.post("/posts", upload.single("imagem"),postsController.saveNewPost);
     app.delete("/posts", postsController.destroy);
     app.post('/upload', upload.single("imagem"), postsController.uploadImagem);
     app.put("/posts/:id", postsController.updatePost);
